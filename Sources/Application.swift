@@ -5,11 +5,11 @@ public class Application {
     let pointer: qmlbind_application
     static private var _instance: Application!
 
-    public init(args: [String]) {
+    public init(arguments: [String]) {
         if Application._instance != nil {
             fatalError("SwiftQML: cannot create multiple Application instances")
         }
-        let array = CStringArray(args)
+        let array = CStringArray(arguments)
         pointer = qmlbind_application_new(Int32(array.length), UnsafeMutablePointer(array.pointers))
         Application._instance = self
     }

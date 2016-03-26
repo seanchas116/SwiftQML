@@ -25,8 +25,11 @@ public class Component {
         }
     }
 
-    public func create() -> JSValue {
+    public func create() throws -> JSValue {
         return JSValue(qmlbind_component_create(pointer))
+        if let error = errorString {
+            throw QMLError.ComponentError(error)
+        }
     }
 
     private var errorString: String? {
