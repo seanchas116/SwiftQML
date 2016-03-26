@@ -2,31 +2,31 @@ import Darwin
 import CQMLBind
 
 public class Application {
-    private let ptr: qmlbind_application
+    let pointer: qmlbind_application
     static private var _instance: Application!
 
-    init(args: [String]) {
+    public init(args: [String]) {
         if Application._instance != nil {
             fatalError("SwiftQML: cannot create multiple Application instances")
         }
         let array = CStringArray(args)
-        ptr = qmlbind_application_new(Int32(array.length), UnsafeMutablePointer(array.pointers))
+        pointer = qmlbind_application_new(Int32(array.length), UnsafeMutablePointer(array.pointers))
         Application._instance = self
     }
 
-    func exec() -> Int {
-        return Int(qmlbind_application_exec(ptr))
+    public func exec() -> Int {
+        return Int(qmlbind_application_exec(pointer))
     }
 
     deinit {
-        qmlbind_application_release(ptr)
+        qmlbind_application_release(pointer)
     }
 
-    static var instance: Application {
+    static public var instance: Application {
         return _instance
     }
 
-    static func processEvents() {
+    static public func processEvents() {
         qmlbind_process_events()
     }
 }
