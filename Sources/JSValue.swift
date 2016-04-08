@@ -1,9 +1,9 @@
 import CQMLBind
 
 public class JSValue {
-    let pointer: qmlbind_value
+    let pointer: UnsafeMutablePointer<qmlbind_value>
 
-    init(_ pointer: qmlbind_value) {
+    init(_ pointer: UnsafeMutablePointer<qmlbind_value>) {
         self.pointer = pointer
     }
 

@@ -2,7 +2,7 @@ import Darwin
 import CQMLBind
 
 public class Application {
-    let pointer: qmlbind_application
+    let pointer: UnsafeMutablePointer<qmlbind_application>
     static private var _instance: Application!
 
     public init(arguments: [String]) {

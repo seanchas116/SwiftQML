@@ -1,7 +1,7 @@
 import CQMLBind
 
 public class Component {
-    let pointer: qmlbind_component
+    let pointer: UnsafeMutablePointer<qmlbind_component>
 
     public init(engine: Engine) {
         pointer = qmlbind_component_new(engine.pointer)
