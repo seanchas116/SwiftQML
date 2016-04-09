@@ -129,17 +129,17 @@ public class JSValue {
 
     public func call(args: [JSValue]) -> JSValue {
         let ptrs = args.map { $0.pointer }
-        return JSValue(qmlbind_value_call(pointer, Int32(ptrs.count), UnsafeMutablePointer(ptrs)))
+        return JSValue(qmlbind_value_call(pointer, Int32(ptrs.count), UnsafePointer(ptrs)))
     }
 
     public func call(args: [JSValue], instance: JSValue) -> JSValue {
         let ptrs = args.map { $0.pointer }
-        return JSValue(qmlbind_value_call_with_instance(pointer, instance.pointer, Int32(ptrs.count), UnsafeMutablePointer(ptrs)))
+        return JSValue(qmlbind_value_call_with_instance(pointer, instance.pointer, Int32(ptrs.count), UnsafePointer(ptrs)))
     }
 
     public func new(args: [JSValue]) -> JSValue {
         let ptrs = args.map { $0.pointer }
-        return JSValue(qmlbind_value_call_constructor(pointer, Int32(ptrs.count), UnsafeMutablePointer(ptrs)))
+        return JSValue(qmlbind_value_call_constructor(pointer, Int32(ptrs.count), UnsafePointer(ptrs)))
     }
 
     public func callMethod(key: String, _ args: [JSValue]) -> JSValue {
