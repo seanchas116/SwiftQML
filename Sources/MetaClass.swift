@@ -108,4 +108,21 @@ class MetaClass {
 
         pointer = qmlbind_metaclass_new(factoryPtr, name, callbacks)
     }
+
+    func addMethod(name: String, arity: Int) {
+        qmlbind_metaclass_add_method(pointer, name, Int32(arity))
+    }
+
+    func addSignal(name: String, params: [String]) {
+        let array = CStringArray(params)
+        qmlbind_metaclass_add_signal(pointer, name, Int32(array.length), UnsafeMutablePointer(array.pointers))
+    }
+
+    func addProperty(name: String, notifySignal: String) {
+        qmlbind_metaclass_add_property(pointer, name, notifySignal)
+    }
+
+    func register(uri: String, versionMajor: Int, versionMinor: Int, qmlName: String) {
+        qmlbind_metaclass_register(pointer, uri, Int32(versionMajor), Int32(versionMinor), qmlName)
+    }
 }
